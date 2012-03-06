@@ -74,6 +74,14 @@ module Codebreaker
           game.guess('1234')
         end
       end
+
+      context "with 1 number match duplicated in secret" do
+        it "sends a mark with '-'" do
+          game.start('1511')
+          output.should_receive(:puts).with('-')
+          game.guess('2134')
+        end
+      end
     end
   end
 end

@@ -15,7 +15,7 @@ module Codebreaker
       (0..3).each do |index|
         if guess[index] == @secret[index]
           mark.insert(0, '+')
-        elsif @secret.include?(guess[index])
+        elsif guess.include?(@secret[index])
           mark << '-'
         end
       end

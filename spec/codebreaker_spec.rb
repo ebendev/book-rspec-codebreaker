@@ -13,7 +13,7 @@ module Codebreaker
       end
 
       it "prompts for the first guess" do
-        output.should_receive(:puts).with('Enter guess:')
+        output.should_receive(:puts).with('Enter guess: ')
         game.start('1234')
       end
     end
@@ -24,6 +24,14 @@ module Codebreaker
           game.start('1234')
           output.should_receive(:puts).with('')
           game.guess('5555')
+        end
+      end
+
+      context "with 1 number match" do
+        it "sends a mark with '-'" do
+          game.start('1234')
+          output.should_receive(:puts).with('-')
+          game.guess('2555')
         end
       end
     end

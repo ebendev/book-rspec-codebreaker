@@ -14,7 +14,7 @@ module Codebreaker
       mark = ''
       (0..3).each do |index|
         if exact_match?(guess, index)
-          mark << '+'
+          mark.insert(0, '+')
         elsif number_match?(guess, index)
           mark << '-'
         end

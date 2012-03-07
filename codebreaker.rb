@@ -4,8 +4,11 @@ module Codebreaker
       @output = output
     end
 
-    def start(secret)
-      @secret = secret
+    def start(secret=nil)
+      @secret = secret || ''
+
+      4.times { @secret << (1..6).to_a.sample.to_s } unless @secret.length == 4
+
       @output.puts 'Welcome to Codebreaker!'
       @output.puts 'Enter guess: '
     end
@@ -27,6 +30,10 @@ module Codebreaker
       end
 
       @output.puts mark.join
+    end
+
+    def secret
+      @secret
     end
   end
 end

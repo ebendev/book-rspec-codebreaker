@@ -5,6 +5,8 @@ require 'codebreaker'
 game = Codebreaker::Game.new(STDOUT)
 game.start(*ARGV)
 
+at_exit { puts "\nThe secret code was: #{game.secret}" }
+
 while guess = STDIN.gets.chomp
   game.guess(guess)
 end

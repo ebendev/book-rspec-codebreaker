@@ -17,7 +17,7 @@ module Codebreaker
       guess = guess.split('')
 
       inexact = secret.zip(guess).reject do |s, g|
-        mark.unshift '+' if s == g
+        mark >> '+' if s == g
       end
 
       secret, guess = *inexact.transpose || [], []
@@ -32,6 +32,10 @@ module Codebreaker
 end
 
 class Array
+  def >>(o)
+    self.unshift o
+  end
+
   def delete_first(o)
     self.delete_at(self.index(o)) if self.index(o)
   end

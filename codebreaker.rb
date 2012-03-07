@@ -12,24 +12,15 @@ module Codebreaker
 
     def guess(guess)
       mark = ''
-      secret = @secret
-      i = 0
-      while i < guess.length do
-        if guess[i] == secret[i]
-          mark.insert(0, '+')
-          guess[i] = ''
-          secret[i] = ''
-        else
-          i += 1
-        end
-      end
 
-      secret.each_char do |c|
-        if guess.include? c
-          mark << '-'
-          guess[guess.index(c)] = ''
-        end
-      end
+      secret, guess = *@secret.split('').zip(guess.split('')).reject do |s, g|
+        mark.insert 0, '+' if s == g
+      end.transpose
+
+      secret.each do |c|
+        mark << '-' if guess.delete_at(guess.index c) unless not guess.index c
+      end unless mark.length > 3
+
       @output.puts mark
     end
   end

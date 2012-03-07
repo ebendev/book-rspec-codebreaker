@@ -11,17 +11,25 @@ module Codebreaker
     end
 
     def guess(guess)
-      mark = ''
+      mark = []
 
-      secret, guess = *@secret.split('').zip(guess.split('')).reject do |s, g|
-        mark.insert 0, '+' if s == g
-      end.transpose
+      secret = @secret.split('')
+      guess = guess.split('')
+
+      inexact = secret.zip(guess).reject do |s, g|
+        mark.unshift '+' if s == g
+      end
+
+      secret, guess = *inexact.transpose || [], []
 
       secret.each do |c|
-        mark << '-' if guess.delete_at(guess.index c) unless not guess.index c
-      end unless mark.length > 3
+        if guess.include? c
+          mark << '-'
+          guess.delete_at(guess.index(c))
+        end
+      end
 
-      @output.puts mark
+      @output.puts mark.join
     end
   end
 end

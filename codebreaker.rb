@@ -29,7 +29,7 @@ module Codebreaker
         mark << '-' if guess.delete_first c
       end
 
-      @output.puts mark.join
+      mark.join
     end
 
     def secret

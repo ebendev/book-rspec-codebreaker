@@ -16,11 +16,11 @@ Given /^the secret code is "([^\"]*)"$/ do |secret|
 end
 
 When /^I guess "([^\"]*)"$/ do |guess|
-  @game.guess(guess)
+  @guess = guess
 end
 
 Then /^the mark should be "([^\"]*)"$/ do |mark|
-  output.messages.should include(mark)
+  @game.guess(@guess).should == mark
 end
 
 class Output

@@ -8,5 +8,5 @@ game.start(*ARGV)
 at_exit { puts "\nThe secret code was: #{game.secret}" }
 
 while guess = STDIN.gets.chomp
-  game.guess(guess)
+  puts game.guess(guess)
 end

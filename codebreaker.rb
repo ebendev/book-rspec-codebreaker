@@ -23,13 +23,14 @@ module Codebreaker
       secret, guess = *inexact.transpose || [], []
 
       secret.each do |c|
-        if guess.include? c
-          mark << '-'
-          guess.delete_at(guess.index(c))
-        end
+        mark << '-' if delete_first guess, c
       end
 
       @output.puts mark.join
+    end
+
+    def delete_first(array, o)
+      array.delete_at(array.index(o)) if array.index(o)
     end
   end
 end

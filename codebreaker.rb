@@ -16,7 +16,7 @@ module Codebreaker
     def guess(guess)
       mark = []
 
-      secret, guess = *@secret.split('').zip(guess.split('')).reject {|s, g| mark >> '+' if s == g }.transpose || [], []
+      secret, guess = *@secret.to_a.zip(guess.to_a).reject {|s, g| mark >> '+' if s == g }.transpose || [], []
       secret.each {|c| mark << '-' if guess.delete_first c }
 
       mark.join
@@ -35,5 +35,11 @@ class Array
 
   def delete_first(o)
     self.delete_at(self.index(o)) if self.index(o)
+  end
+end
+
+class String
+  def to_a
+    self.split ''
   end
 end

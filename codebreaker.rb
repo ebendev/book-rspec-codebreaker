@@ -16,18 +16,8 @@ module Codebreaker
     def guess(guess)
       mark = []
 
-      secret = @secret.split('')
-      guess = guess.split('')
-
-      inexact = secret.zip(guess).reject do |s, g|
-        mark >> '+' if s == g
-      end
-
-      secret, guess = *inexact.transpose || [], []
-
-      secret.each do |c|
-        mark << '-' if guess.delete_first c
-      end
+      secret, guess = *@secret.split('').zip(guess.split('')).reject {|s, g| mark >> '+' if s == g }.transpose || [], []
+      secret.each {|c| mark << '-' if guess.delete_first c }
 
       mark.join
     end

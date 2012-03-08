@@ -16,7 +16,7 @@ module Codebreaker
     def guess(guess)
       mark = []
 
-      secret, guess = *@secret.to_a.zip(guess.to_a).reject {|s, g| mark >> '+' if s == g }.transpose || [], []
+      secret, guess = *[@secret.to_a, guess.to_a].transpose.reject {|s, g| mark >> '+' if s == g }.transpose || [], []
       secret.each {|c| mark << '-' if guess.delete_first c }
 
       mark.join
